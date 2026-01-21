@@ -21,6 +21,16 @@ body { margin:0; font-family: Arial, sans-serif; background:#0f1115; color:#e7ea
 .btn--primary { background:#2a3cff; border-color:#2a3cff; }
 .btn--danger { background:#2b1f25; border-color:#3a2a33; }
 .btn:hover { filter: brightness(1.08); }
+.hero {
+  position: relative;
+  min-height: 440px;
+  border-radius: 22px;
+  overflow: hidden;
+
+  background-size: cover;        /* чтобы растягивалось на весь блок */
+  background-position: center;   /* центр */
+  background-repeat: no-repeat;  /* ❗ чтобы НЕ плитилось */
+}
 
 .grid { display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap:12px; margin-top: 16px; }
 @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } .search__input{ width: 180px; } }
