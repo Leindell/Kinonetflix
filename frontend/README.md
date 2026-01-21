@@ -1,39 +1,37 @@
-# Frontend — Каталог фильмов
+# Frontend (React SPA)
 
-Frontend-часть учебного проекта «Каталог фильмов».  
-Отвечает за пользовательский интерфейс, отображение данных и навигацию.
+## Запуск (Windows)
 
-## Технологии
-- HTML5
-- CSS3
-- Jinja2 
+### 1) Backend
 
-## Структура frontend
+```bat
+cd backend
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+python seed.py
+python run.py
+```
 
-templates/base.html  
-Базовый шаблон приложения.  
-Содержит HTML-каркас, шапку сайта, навигацию и форму поиска.
+Backend поднимется на `http://127.0.0.1:5000`.
 
-templates/index.html  
-Главная страница каталога.  
-Отображает список всех фильмов и результаты поиска.
+### 2) Frontend
 
-templates/favorites.html  
-Страница избранных фильмов.  
-Показывает фильмы, отмеченные как избранные.
+Открой второй терминал:
 
-templates/movie_detail.html  
-Страница одного фильма.  
-Содержит подробную информацию о фильме и ссылку для просмотра.
+```bat
+cd frontend
+npm install
+npm run dev
+```
 
-static/css/style.css  
-Основной файл стилей интерфейса.  
-Содержит стили для layout, карточек фильмов, кнопок и навигации.
+Frontend поднимется на `http://127.0.0.1:5173`.
 
-static/img/  
-Каталог изображений (постеры фильмов).
+## Сборка SPA (prod)
 
-## Особенности
-- Используется шаблонное наследование (`extends`, `block`)
-- Интерфейс разделён на логические блоки
-- CSS структурирован и снабжён комментариями
+```bat
+cd frontend
+npm run build
+```
+
+Папка `frontend/dist` будет отдаваться Flask автоматически (fallback для React Router настроен в `backend/app/__init__.py`).

@@ -1,0 +1,193 @@
+/* ContentPage.css (или MoviePage.css) — полностью заменяй файл */
+
+.page {
+  padding: 18px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.back {
+  text-decoration: none;
+  color: inherit;
+  opacity: 0.9;
+}
+
+.error {
+  padding: 14px;
+  border-radius: 12px;
+  background: rgba(255, 0, 0, 0.08);
+}
+
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  width: 100%;
+
+  /* чтобы фон реально "растягивался" как баннер */
+  height: 62vh;
+  min-height: 520px;
+  max-height: 780px;
+
+  border-radius: 22px;
+  overflow: hidden;
+
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+
+  /* если фон не задан — будет мягкий запасной */
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+/* затемняющий слой для читаемости */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.88) 0%,
+    rgba(0, 0, 0, 0.58) 45%,
+    rgba(0, 0, 0, 0.22) 80%,
+    rgba(0, 0, 0, 0.08) 100%
+  );
+}
+
+/* контент поверх фона */
+.hero-inner {
+  position: relative;
+  z-index: 2;
+
+  height: 100%;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 22px;
+
+  padding: 32px;
+  align-content: center; /* вертикальное центрирование */
+}
+
+.poster-wrap {
+  width: 260px;
+}
+
+.poster {
+  width: 100%;
+  border-radius: 16px;
+  display: block;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.45);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.poster.placeholder {
+  height: 380px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.meta {
+  max-width: 820px;
+}
+
+.title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.title {
+  font-size: 34px;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.year {
+  opacity: 0.85;
+  font-size: 18px;
+}
+
+.genre {
+  margin-top: 10px;
+  opacity: 0.92;
+}
+
+.ratings {
+  margin-top: 16px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.rate {
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.10);
+  min-width: 140px;
+  backdrop-filter: blur(2px);
+}
+
+.rate-label {
+  font-size: 12px;
+  opacity: 0.85;
+}
+
+.rate-value {
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+.desc {
+  margin-top: 16px;
+  max-width: 720px;
+  line-height: 1.5;
+  opacity: 0.96;
+}
+
+.actions {
+  margin-top: 18px;
+}
+
+.watch {
+  display: inline-block;
+  padding: 12px 16px;
+  border-radius: 14px;
+  text-decoration: none;
+
+  background: rgba(255, 255, 255, 0.16);
+  color: inherit;
+  font-weight: 700;
+
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.watch:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.24);
+}
+
+/* ===== Адаптив ===== */
+@media (max-width: 900px) {
+  .hero {
+    height: auto;
+    min-height: 460px;
+    max-height: none;
+  }
+
+  .hero-inner {
+    grid-template-columns: 1fr;
+    align-content: start;
+    padding: 22px;
+  }
+
+  .poster-wrap {
+    width: 220px;
+  }
+}
