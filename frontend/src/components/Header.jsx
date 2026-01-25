@@ -1,5 +1,6 @@
 import React from 'react'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { useFavorites } from '../hooks/useFavorites'
 
 function navClass({ isActive }) {
   return isActive ? 'nav-link nav-link--active' : 'nav-link'
@@ -8,12 +9,13 @@ function navClass({ isActive }) {
 export default function Header() {
   const navigate = useNavigate()
   const location = useLocation()
+const { favorites } = useFavorites()
+const favCount = favorites?.length ?? 0
 
   const [q, setQ] = React.useState(() => {
     return new URLSearchParams(location.search).get('q') || ''
   })
 
-  // если пользователь перешёл по меню и query-param изменился — синхронизируем поле поиска
   React.useEffect(() => {
     setQ(new URLSearchParams(location.search).get('q') || '')
   }, [location.search])
@@ -34,11 +36,13 @@ export default function Header() {
       <div className="container header__inner">
         <div className="brand">🎬 Kinonetflix</div>
 
-        <nav className="nav">
-          <NavLink to="/movies" className={navClass}>Фильмы</NavLink>
-          <NavLink to="/series" className={navClass}>Сериалы</NavLink>
-          <NavLink to="/anime" className={navClass}>Аниме</NavLink>
-        </nav>
+     <nav className="nav">
+  <NavLink to="/movies" className={navClass}>Фильмы</NavLink>
+  <NavLink to="/series" className={navClass}>Сериалы</NavLink>
+  <NavLink to="/anime" className={navClass}>Аниме</NavLink>
+  <NavLink to="/favorites" className={navClass}>Избранное</NavLink>
+</nav>
+
 
         <form className="search" onSubmit={onSubmit}>
           <input
