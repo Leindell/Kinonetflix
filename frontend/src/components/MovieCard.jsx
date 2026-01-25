@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useFavorites } from '../hooks/useFavorites'
 
 function formatRating(v) {
   if (v === null || v === undefined) return '—'
@@ -9,18 +10,42 @@ function formatRating(v) {
 }
 
 export default function MovieCard({ movie }) {
+  if (!movie) return null
+
   const posterSrc = movie.poster ? `/static/img/${movie.poster}` : null
+  const { isFavorite, toggleFavorite } = useFavorites()
+  const fav = isFavorite(movie.id)
 
   return (
     <div className="card">
-      <Link className="card__posterLink" to={`/content/${movie.id}`} aria-label={movie.title}>
+      <button
+        className="favBtn"
+        type="button"
+        onClick={(e) => {
+          e.preventDefault()
+          e.stopPropagation()
+          toggleFavorite(movie.id)
+        }}
+        title={fav ? 'Убрать из избранного' : 'В избранное'}
+        aria-label={fav ? 'Убрать из избранного' : 'Добавить в избранное'}
+      >
+        {fav ? '★' : '☆'}
+      </button>
+ 
+
+ 
+      <Link className="card__posterLink" to={`/movie/${movie.id}`} aria-label={movie.title}>
         {posterSrc ? (
-          <img className="card__poster" src={posterSrc} alt={`Постер: ${movie.title}`} loading="lazy" />
+          <img
+            className="card__poster"
+            src={posterSrc}
+            alt={`Постер: ${movie.title}`}
+            loading="lazy"
+          />
         ) : (
           <div className="card__posterPlaceholder">No poster</div>
         )}
 
-        {/* Hover overlay снизу, как ты описал */}
         <div className="card__hover">
           <div className="card__hoverTitle">{movie.title}</div>
           <div className="card__hoverMeta">
@@ -31,17 +56,9 @@ export default function MovieCard({ movie }) {
             <span className="chip">IMDb {formatRating(movie.rating_imdb)}</span>
             <span className="chip">Моя {formatRating(movie.rating_personal)}</span>
           </div>
-          {movie.description ? (
-            <div className="card__hoverDesc">{movie.description}</div>
-          ) : null}
+          {movie.description ? <div className="card__hoverDesc">{movie.description}</div> : null}
         </div>
       </Link>
-
-      {/* Низ карточки (виден всегда) */}
-      <div className="card__footer">
-        <div className="card__title" title={movie.title}>{movie.title}</div>
-        <div className="card__meta">{movie.year || '—'} • {movie.genre || '—'}</div>
-      </div>
     </div>
   )
 }
