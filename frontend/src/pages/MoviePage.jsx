@@ -30,13 +30,11 @@ export default function MoviePage() {
     };
   }, [id]);
 
-  // Постеры лежат в backend/app/static/img
   const posterSrc = useMemo(() => {
     if (!movie?.poster) return "";
     return `/static/img/${movie.poster}`;
   }, [movie]);
 
-  // Фоны лежат в backend/app/static/backgrounds
   const bgSrc = useMemo(() => {
     if (!movie?.background) return "";
     return `/static/backgrounds/${movie.background}`;

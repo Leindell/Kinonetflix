@@ -1,6 +1,5 @@
-import React from 'react'
+import React from "react";
 import { useSearchParams } from 'react-router-dom'
-
 import { fetchGenres, fetchMovies } from '../api/movies.js'
 import MovieGrid from '../components/MovieGrid.jsx'
 import Toolbar from '../components/Toolbar.jsx'
@@ -12,13 +11,11 @@ export default function CatalogPage({ contentType }) {
   const [genre, setGenre] = React.useState('')
   const [sort, setSort] = React.useState('title')
   const [order, setOrder] = React.useState('asc')
-
   const [genres, setGenres] = React.useState([])
   const [items, setItems] = React.useState([])
   const [loading, setLoading] = React.useState(true)
   const [error, setError] = React.useState('')
 
-  // список жанров
   React.useEffect(() => {
     let cancelled = false
     fetchGenres()
@@ -26,12 +23,11 @@ export default function CatalogPage({ contentType }) {
         if (!cancelled) setGenres(g)
       })
       .catch(() => {
-        // жанры не критичны, можно молча
+
       })
     return () => { cancelled = true }
   }, [])
 
-  // загрузка контента
   React.useEffect(() => {
     let cancelled = false
     setLoading(true)
